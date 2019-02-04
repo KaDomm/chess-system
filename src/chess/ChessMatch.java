@@ -39,7 +39,8 @@ public class ChessMatch {
 		Position target = targetPosition.toPosition();
 		
 		validateSourcePosition(source);
-		
+		validateTargetPosition(source, target);
+
 		Piece captuerPiece = makeMove(source, target);
 		
 		return (ChessPiece) captuerPiece;
@@ -66,6 +67,12 @@ public class ChessMatch {
 		if(!board.piece(position).isThereAnyPossibleMove()) 
 			throw new ChessException("There is no possible moves for the chosen piece");
 	}
+	
+	private void validateTargetPosition(Position source, Position target) {
+		if(!board.piece(source).possibleMove(target))
+			throw new ChessException("The chosen pience can't move to target position");
+		
+	}
 
 	
 	private void placeNewPiece(char column, int row, ChessPiece piece) {
@@ -82,8 +89,8 @@ public class ChessMatch {
 		placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
 		placeNewPiece('g', 8, new Knight(board, Color.BLACK));
 		placeNewPiece('h', 8, new Rook(board, Color.BLACK));
-		for (int i = 0; i < 8; i++)
-			placeNewPiece((char) ('a' + i), 7, new Pawn(board, Color.BLACK));
+		/*for (int i = 0; i < 8; i++)
+			placeNewPiece((char) ('a' + i), 7, new Pawn(board, Color.BLACK));*/
 		
 		placeNewPiece('a', 1, new Rook(board, Color.WHITE));
 		placeNewPiece('b', 1, new Knight(board, Color.WHITE));
@@ -93,8 +100,8 @@ public class ChessMatch {
 		placeNewPiece('f', 1, new Bishop(board, Color.WHITE));
 		placeNewPiece('g', 1, new Knight(board, Color.WHITE));
 		placeNewPiece('h', 1, new Rook(board, Color.WHITE));
-		for (int i = 0; i < 8; i++)
-			placeNewPiece((char) ('a' + i), 2, new Pawn(board, Color.WHITE));
+		/*for (int i = 0; i < 8; i++)
+			placeNewPiece((char) ('a' + i), 2, new Pawn(board, Color.WHITE));*/
 
 	}
 

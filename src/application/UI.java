@@ -57,17 +57,23 @@ public class UI {
 	/***********************************************************************************/
 
 	public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured) {
-		
+
 		printBoard(chessMatch.getPieces());
-		
+
 		System.out.println();
 		printCapturedPieces(captured);
-		
+
 		System.out.println("\nTurn: " + chessMatch.getTurn());
-		System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
-		
-		if(chessMatch.getCheck())
-			System.out.println("CHECK!");
+		if (!chessMatch.getCheckMate()) {
+
+			System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+
+			if (chessMatch.getCheck())
+				System.out.println("CHECK!");
+		}
+		else {
+			System.out.println("CHECKMATE! \nWinner: " + chessMatch.getCurrentPlayer());
+		}
 
 	}
 
@@ -128,10 +134,10 @@ public class UI {
 				.collect(Collectors.toList());
 
 		System.out.println("Captured pieces:");
-		
+
 		System.out.print("White: ");
 		System.out.println(ANSI_WHITE + Arrays.toString(white.toArray()) + ANSI_RESET);
-		
+
 		System.out.print("Black: ");
 		System.out.println(ANSI_YELLOW + Arrays.toString(black.toArray()) + ANSI_RESET);
 	}

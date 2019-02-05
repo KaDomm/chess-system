@@ -7,14 +7,20 @@ import chess.Color;
 
 public class Rook extends ChessPiece {
 
+	/***********************************************************************************/
+
 	public Rook(Board board, Color color) {
 		super(board, color);
 	}
+
+	/***********************************************************************************/
 
 	@Override
 	public String toString() {
 		return "R";
 	}
+
+	/***********************************************************************************/
 
 	@Override
 	public boolean[][] possibleMoves() {
@@ -23,7 +29,7 @@ public class Rook extends ChessPiece {
 
 		Position p = new Position(0, 0);
 
-		// above
+		/**** ABOVE **********************************************/
 		p.setValues(position.getRow() - 1, position.getColumn());
 		while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
 			mat[p.getRow()][p.getColumn()] = true;
@@ -31,9 +37,8 @@ public class Rook extends ChessPiece {
 		}
 		if (getBoard().positionExists(p) && isThereOpponentPiece(p))
 			mat[p.getRow()][p.getColumn()] = true;
-		
 
-		// left
+		/**** LEFT ***********************************************/
 		p.setValues(position.getRow(), position.getColumn() - 1);
 		while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
 			mat[p.getRow()][p.getColumn()] = true;
@@ -42,8 +47,7 @@ public class Rook extends ChessPiece {
 		if (getBoard().positionExists(p) && isThereOpponentPiece(p))
 			mat[p.getRow()][p.getColumn()] = true;
 
-		
-		// right
+		/**** RIGHT **********************************************/
 		p.setValues(position.getRow(), position.getColumn() + 1);
 		while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
 			mat[p.getRow()][p.getColumn()] = true;
@@ -52,8 +56,7 @@ public class Rook extends ChessPiece {
 		if (getBoard().positionExists(p) && isThereOpponentPiece(p))
 			mat[p.getRow()][p.getColumn()] = true;
 		
-
-		// below
+		/**** BELOW **********************************************/
 		p.setValues(position.getRow() + 1, position.getColumn());
 		while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
 			mat[p.getRow()][p.getColumn()] = true;

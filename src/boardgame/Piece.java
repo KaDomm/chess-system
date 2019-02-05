@@ -6,24 +6,29 @@ public abstract class Piece {
 	
 	private Board board;
 	
-
+	/***********************************************************************************/
+	
 	public Piece(Board board) {
 		this.board = board;
 	}
 	
+	/***********************************************************************************/
 
 	protected Board getBoard() {
 		return board;
 	}
 	
+	/***********************************************************************************/
 	
 	public abstract boolean[][] possibleMoves();
-	
+
+	/***********************************************************************************/
 	
 	public boolean possibleMove(Position position) {
 		return possibleMoves()[position.getRow()][position.getColumn()];
 	}
 	
+	/***********************************************************************************/
 	
 	public boolean isThereAnyPossibleMove() {
 		

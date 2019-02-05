@@ -1,5 +1,8 @@
 package chess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import boardgame.Board;
 import boardgame.Piece;
 import boardgame.Position;
@@ -15,6 +18,9 @@ public class ChessMatch {
 	private Integer turn;
 	private Color currentPlayer;
 	private Board board;
+
+	private List<Piece> piecesOnTheBoard = new ArrayList<>();
+	private List<Piece> capturedPieces = new ArrayList<>();
 
 	/***********************************************************************************/
 
@@ -84,6 +90,11 @@ public class ChessMatch {
 
 		Piece capturedPiece = board.removePiece(target);
 
+		if (capturedPiece != null) {
+			piecesOnTheBoard.remove(capturedPiece);
+			capturedPieces.add(capturedPiece);
+		}
+
 		board.placePiece(p, target);
 
 		return capturedPiece;
@@ -101,12 +112,12 @@ public class ChessMatch {
 
 		if (!board.piece(position).isThereAnyPossibleMove())
 			throw new ChessException("There is no possible moves for the chosen piece");
-
 	}
 
 	/***********************************************************************************/
 
 	private void validateTargetPosition(Position source, Position target) {
+
 		if (!board.piece(source).possibleMove(target))
 			throw new ChessException("The chosen pience can't move to target position");
 	}
@@ -114,6 +125,7 @@ public class ChessMatch {
 	/***********************************************************************************/
 
 	private void nextTurn() {
+
 		turn++;
 		currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
 	}
@@ -121,33 +133,36 @@ public class ChessMatch {
 	/***********************************************************************************/
 
 	private void placeNewPiece(char column, int row, ChessPiece piece) {
+
 		board.placePiece(piece, new ChessPosition(column, row).toPosition());
+		piecesOnTheBoard.add(piece);
 	}
 
 	/***********************************************************************************/
 
 	private void initialSetup() {
+
 		placeNewPiece('a', 8, new Rook(board, Color.BLACK));
-		placeNewPiece('b', 8, new Knight(board, Color.BLACK));
+		/*placeNewPiece('b', 8, new Knight(board, Color.BLACK));
 		placeNewPiece('c', 8, new Bishop(board, Color.BLACK));
-		placeNewPiece('d', 8, new King(board, Color.BLACK));
-		placeNewPiece('e', 8, new Queen(board, Color.BLACK));
+		*/placeNewPiece('d', 8, new King(board, Color.BLACK));
+		/*placeNewPiece('e', 8, new Queen(board, Color.BLACK));
 		placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
 		placeNewPiece('g', 8, new Knight(board, Color.BLACK));
-		placeNewPiece('h', 8, new Rook(board, Color.BLACK));
+		*/placeNewPiece('h', 8, new Rook(board, Color.BLACK));
 		/*for (int i = 0; i < 8; i++)
-			placeNewPiece((char) ('a' + i), 7, new Pawn(board, Color.BLACK));*/
+			placeNewPiece((char) ('a' + i), 7, new Pawn(board, Color.BLACK));
 
-		placeNewPiece('a', 1, new Rook(board, Color.WHITE));
-		placeNewPiece('b', 1, new Knight(board, Color.WHITE));
+		*/placeNewPiece('a', 1, new Rook(board, Color.WHITE));
+		/*placeNewPiece('b', 1, new Knight(board, Color.WHITE));
 		placeNewPiece('c', 1, new Bishop(board, Color.WHITE));
-		placeNewPiece('d', 5, new King(board, Color.WHITE));
-		placeNewPiece('e', 1, new Queen(board, Color.WHITE));
+		*/placeNewPiece('d', 5, new King(board, Color.WHITE));
+		/*placeNewPiece('e', 1, new Queen(board, Color.WHITE));
 		placeNewPiece('f', 1, new Bishop(board, Color.WHITE));
 		placeNewPiece('g', 1, new Knight(board, Color.WHITE));
-		placeNewPiece('h', 1, new Rook(board, Color.WHITE));
+		*/placeNewPiece('h', 1, new Rook(board, Color.WHITE));
 		/*for (int i = 0; i < 8; i++)
-			placeNewPiece((char) ('a' + i), 2, new Pawn(board, Color.WHITE));*/
-	}
+			placeNewPiece((char) ('a' + i), 2, new Pawn(board, Color.WHITE));
+	*/}
 
 }
